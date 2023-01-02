@@ -19,6 +19,7 @@ function App() {
     const askPrice = searchParams.get("askPrice");
     const address = searchParams.get("address");
     const name = searchParams.get("name");
+    const ipfs = searchParams.get("ipfs");
     if (fa && tokenId && askId && askPrice && address && name) {
       const signedData = signSmartContractData(
         {
@@ -47,6 +48,12 @@ function App() {
         height: 600,
         width: 400,
         theme: "dark",
+        color_background: "#000000",
+        color_secondary_text: "#958E99",
+        color_buttons: "#FF006E",
+        color_icons: "#958E99",
+        color_links: "#FF006E",
+
         listeners: {
           loaded: () => console.log("loaded"),
         },
@@ -56,7 +63,8 @@ function App() {
         ...otherWidgetOptions,
         extra: {
           item_info: {
-            image_url: `https://assets.objkt.media/file/assets-003/${fa}/${tokenId}/thumb400`,
+            /* image_url: `https://assets.objkt.media/file/assets-003/${fa}/${tokenId}/thumb400`, */
+            image_url: `https://ipfs.io/ipfs/${ipfs}`,
             name: name,
           },
         },
