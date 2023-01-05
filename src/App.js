@@ -27,12 +27,12 @@ function App() {
           commodity: "XTZ",
           commodity_amount: (parseInt(askPrice) / 10 ** 6).toString(),
           pk_id: "key1",
-          sc_address: "KT1RP3iWctGGT2r2FWh7KBGiBEajk5txaAZA",
+          sc_address: "KT1WvzYHCNBvDSdwafTHv7nJ1dWmZ8GCYuuC",
           sc_id: uuidv4(), // must be unique for any request
           sc_input_data:
             "0x" +
             Buffer.from(
-              `{ "entrypoint": "add_bribe", "value": { "prim": "Pair", "args": [ { "int": "3584" }, { "prim": "Pair", "args": [ { "prim": "Right", "args": [ { "prim": "Right", "args": [ { "prim": "Unit" } ] } ] }, { "int": "${askPrice}" } ] } ] } }`,
+              `{ "entrypoint": "fulfill_ask", "value": { "prim": "Pair", "args": [ { "int": "${askId}" }, { "prim": "Some", "args": [ { "string": "${address}" } ] } ] } }`,
               "utf8"
             ).toString("hex"),
         },
@@ -44,7 +44,7 @@ function App() {
         partner_id: partnerId,
         container_id: "widget",
         click_id: uuidv4(), // unique id of purhase in your system
-        origin: "https://sandbox.wert.io", // this option needed only for this example to work
+        origin: "https://widget.wert.io", // this option needed only for this example to work
         height: 600,
         width: 400,
         theme: "dark",
@@ -56,6 +56,9 @@ function App() {
 
         listeners: {
           loaded: () => console.log("loaded"),
+          payment_status: (data) => {
+            console.log(data);
+          },
         },
       };
       setOptions({
@@ -88,3 +91,5 @@ function App() {
 export default App;
 
 //http://localhost:3000/?fa=KT1WkviqkcHaUL6Axh9zFTrpDqitEqC38vCW&tokenId=7&address=tz1WDRu8H4dHbUwygocLsmaXgHthGiV6JGJG&askId=2344&askPrice=13000000&name=Architectural%20Liberty%201%20I%20Kenchiku%20no%20jiy%C5%AB%201%20I%20%E5%BB%BA%E7%AF%89%E3%81%AE%E8%87%AA%E7%94%B1
+
+//https://naan-nft-credit-card.netlify.app/?fa=KT1PM918cFGncYaMd3jzdAzsQGLtGUg2AVzQ&tokenId=0&address=tz1WDRu8H4dHbUwygocLsmaXgHthGiV6JGJG&askId=2830045&askPrice=2000000&name=Matrix&ipfs=QmP4xrwWZxxSC1mCCrLGFQxRgWctListSUdbsm7yn3r2w7
