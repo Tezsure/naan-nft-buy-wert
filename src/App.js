@@ -5,6 +5,7 @@ import { signSmartContractData } from "@wert-io/widget-sc-signer";
 import { v4 as uuidv4 } from "uuid";
 import { Buffer } from "buffer/";
 import { useSearchParams } from "react-router-dom";
+import base64url from "base64url";
 
 function App() {
   window.Buffer = Buffer;
@@ -18,7 +19,8 @@ function App() {
     const askId = searchParams.get("askId");
     const askPrice = searchParams.get("askPrice");
     const address = searchParams.get("address");
-    const name = searchParams.get("name");
+    let name = searchParams.get("name");
+    name = base64url.decode(name);
     const ipfs = searchParams.get("ipfs");
     if (fa && tokenId && askId && askPrice && address && name) {
       const signedData = signSmartContractData(

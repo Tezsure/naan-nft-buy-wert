@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@wert-io/module-react-component": "^0.2.0",
     "@wert-io/widget-sc-signer": "^1.0.0",
+    "base64url": "^3.0.1",
     "buffer": "^6.0.3",
     "dotenv": "^16.0.2",
     "react": "^18.2.0",
